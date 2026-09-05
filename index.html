@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>Biyigraphics | 3D Graphic Designer</title>
 
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
 
     <style>
+        /* ============================================================
+               GLOBAL RESET & BASE
+               ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -36,13 +42,16 @@
         }
 
         .section-padding {
-            padding: 80px 0;
+            padding: 90px 0;
         }
 
         .bg-dark-soft {
             background: #111827 !important;
         }
 
+        /* ============================================================
+               THREE.JS CANVAS (BACKGROUND 3D)
+               ============================================================ */
         #three-canvas {
             position: fixed;
             top: 0;
@@ -53,6 +62,9 @@
             pointer-events: none;
         }
 
+        /* ============================================================
+               OVERLAY GLOW
+               ============================================================ */
         .glow-overlay {
             position: fixed;
             top: 0;
@@ -62,33 +74,37 @@
             pointer-events: none;
             z-index: 1;
             background:
-                radial-gradient(ellipse at 20% 50%, rgba(212, 160, 23, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 50%, rgba(212, 160, 23, 0.04) 0%, transparent 60%);
+                radial-gradient(ellipse at 20% 50%, rgba(212, 160, 23, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(212, 160, 23, 0.05) 0%, transparent 60%);
         }
 
+        /* ============================================================
+               NAVBAR
+               ============================================================ */
         .navbar {
-            background: rgba(11, 15, 26, 0.75);
-            backdrop-filter: blur(18px) saturate(1.2);
-            -webkit-backdrop-filter: blur(18px) saturate(1.2);
-            border-bottom: 1px solid rgba(212, 160, 23, 0.12);
-            padding: 10px 0;
+            background: rgba(11, 15, 26, 0.65);
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            border-bottom: 1px solid rgba(212, 160, 23, 0.08);
+            padding: 12px 0;
             transition: 0.4s cubic-bezier(.25, .46, .45, .94);
             z-index: 1050;
         }
 
         .navbar.scrolled {
             background: rgba(11, 15, 26, 0.92);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
         }
 
         .navbar-brand {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 800;
             letter-spacing: -0.5px;
             background: linear-gradient(135deg, #d4a017, #f5c842);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transition: 0.3s;
         }
 
         .navbar-brand span {
@@ -100,7 +116,7 @@
             color: rgba(255, 255, 255, 0.75) !important;
             font-weight: 500;
             font-size: 0.9rem;
-            margin: 0 8px;
+            margin: 0 10px;
             padding: 6px 0 !important;
             transition: 0.3s;
             position: relative;
@@ -113,7 +129,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #d4a017;
+            background: linear-gradient(90deg, #d4a017, #f5c842);
             transition: 0.3s;
         }
 
@@ -152,17 +168,18 @@
             background: linear-gradient(135deg, #d4a017, #f5c842);
             color: #0b0f1a;
             border: none;
-            padding: 10px 24px;
+            padding: 10px 28px;
             font-weight: 700;
             border-radius: 50px;
             transition: 0.35s cubic-bezier(.25, .46, .45, .94);
             box-shadow: 0 4px 25px rgba(212, 160, 23, 0.25);
             font-size: 0.9rem;
+            letter-spacing: 0.3px;
         }
 
         .btn-gold:hover {
             transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 40px rgba(212, 160, 23, 0.4);
+            box-shadow: 0 8px 45px rgba(212, 160, 23, 0.4);
             color: #0b0f1a;
         }
 
@@ -170,11 +187,12 @@
             background: transparent;
             color: #d4a017;
             border: 2px solid #d4a017;
-            padding: 10px 24px;
+            padding: 10px 28px;
             font-weight: 700;
             border-radius: 50px;
             transition: 0.35s cubic-bezier(.25, .46, .45, .94);
             font-size: 0.9rem;
+            letter-spacing: 0.3px;
         }
 
         .btn-outline-gold:hover {
@@ -184,31 +202,34 @@
             box-shadow: 0 8px 35px rgba(212, 160, 23, 0.25);
         }
 
+        /* ============================================================
+               HERO
+               ============================================================ */
         .hero-section {
             min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             z-index: 2;
-            padding: 100px 0 60px;
+            padding: 110px 0 70px;
         }
 
         .hero-small {
             color: #d4a017;
             font-weight: 600;
-            letter-spacing: 4px;
-            font-size: 0.75rem;
+            letter-spacing: 5px;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            opacity: 0.8;
-            margin-bottom: 6px;
+            opacity: 0.9;
+            margin-bottom: 8px;
         }
 
         .hero-section h1 {
-            font-size: 52px;
+            font-size: 62px;
             font-weight: 900;
             line-height: 1.05;
-            letter-spacing: -1.5px;
-            margin-bottom: 6px;
+            letter-spacing: -2px;
+            margin-bottom: 8px;
         }
 
         .hero-section h1 span {
@@ -219,127 +240,170 @@
         }
 
         .hero-section h2 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 400;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 18px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 20px;
         }
 
         .hero-text {
-            max-width: 580px;
-            color: rgba(255, 255, 255, 0.65);
-            font-size: 1rem;
+            max-width: 560px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.05rem;
             line-height: 1.8;
         }
 
         .hero-buttons {
-            margin-top: 28px;
+            margin-top: 32px;
             display: flex;
             flex-wrap: wrap;
-            gap: 14px;
+            gap: 16px;
         }
 
+        /* ---- 3D Designer Card (Hero) ---- */
         .designer-card-3d {
-            perspective: 900px;
+            perspective: 1000px;
             cursor: default;
-            max-width: 340px;
+            max-width: 360px;
             margin: 0 auto;
         }
 
         .designer-card-3d .card-inner {
             background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(212, 160, 23, 0.15);
-            border-radius: 28px;
-            padding: 40px 20px 32px;
+            border-radius: 32px;
+            padding: 45px 25px 35px;
             text-align: center;
             transform-style: preserve-3d;
-            transition: transform 0.5s cubic-bezier(.23, 1, .32, 1);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.6s cubic-bezier(.23, 1, .32, 1);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .designer-card-3d .card-inner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(212, 160, 23, 0.05), transparent, rgba(212, 160, 23, 0.05), transparent);
+            animation: rotateGlow 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotateGlow {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .designer-card-3d:hover .card-inner {
-            transform: rotateY(6deg) rotateX(4deg) scale(1.02);
+            transform: rotateY(8deg) rotateX(6deg) scale(1.02);
         }
 
         .designer-icon-3d {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 20px;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 22px;
             background: linear-gradient(135deg, #d4a017, #f5c842);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            font-size: 46px;
             color: #0b0f1a;
-            box-shadow: 0 0 60px rgba(212, 160, 23, 0.2);
-            transform: translateZ(30px);
+            box-shadow: 0 0 80px rgba(212, 160, 23, 0.25);
+            transform: translateZ(40px);
+            position: relative;
+            z-index: 2;
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                box-shadow: 0 0 40px rgba(212, 160, 23, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 80px rgba(212, 160, 23, 0.4);
+            }
         }
 
         .designer-card-3d h3 {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
-            transform: translateZ(20px);
+            transform: translateZ(30px);
+            position: relative;
+            z-index: 2;
         }
 
         .designer-card-3d p {
             color: rgba(255, 255, 255, 0.6);
-            transform: translateZ(15px);
-            font-size: 0.9rem;
+            transform: translateZ(20px);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 2;
         }
 
         .experience-badge-3d {
             display: inline-block;
-            margin-top: 14px;
-            padding: 8px 22px;
+            margin-top: 16px;
+            padding: 10px 28px;
             border-radius: 50px;
             background: linear-gradient(135deg, #d4a017, #f5c842);
             color: #0b0f1a;
             font-weight: 700;
-            font-size: 0.8rem;
-            transform: translateZ(25px);
+            font-size: 0.85rem;
+            transform: translateZ(35px);
             box-shadow: 0 4px 30px rgba(212, 160, 23, 0.2);
-        }
-
-        .floating-badge {
+            position: relative;
+            z-index: 2;
             animation: floatBadge 3s ease-in-out infinite;
         }
 
         @keyframes floatBadge {
             0%,
             100% {
-                transform: translateY(0px);
+                transform: translateY(0px) translateZ(35px);
             }
             50% {
-                transform: translateY(-8px);
+                transform: translateY(-10px) translateZ(35px);
             }
         }
 
+        /* ============================================================
+               SECTION TITLES
+               ============================================================ */
         .section-title {
             text-align: center;
-            margin-bottom: 44px;
+            margin-bottom: 50px;
         }
 
         .section-title .label {
             display: inline-block;
             color: #d4a017;
             font-weight: 600;
-            letter-spacing: 3px;
-            font-size: 0.7rem;
+            letter-spacing: 4px;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            background: rgba(212, 160, 23, 0.10);
-            padding: 3px 16px;
+            background: rgba(212, 160, 23, 0.08);
+            padding: 4px 20px;
             border-radius: 50px;
-            border: 1px solid rgba(212, 160, 23, 0.12);
-            margin-bottom: 10px;
+            border: 1px solid rgba(212, 160, 23, 0.1);
+            margin-bottom: 12px;
         }
 
         .section-title h2 {
-            font-size: 34px;
+            font-size: 40px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
         }
 
         .section-title h2 .highlight {
@@ -349,176 +413,144 @@
             background-clip: text;
         }
 
+        /* ============================================================
+               ABOUT
+               ============================================================ */
         .about-card-3d {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(212, 160, 23, 0.08);
-            border-radius: 24px;
-            padding: 40px 20px;
+            border-radius: 28px;
+            padding: 45px 25px;
             text-align: center;
-            transition: 0.4s;
+            transition: 0.5s;
             transform-style: preserve-3d;
             perspective: 700px;
+            height: 100%;
         }
 
         .about-card-3d:hover {
-            transform: rotateY(3deg) rotateX(2deg);
+            transform: rotateY(4deg) rotateX(3deg);
             border-color: rgba(212, 160, 23, 0.25);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
         }
 
         .about-card-3d .icon {
-            font-size: 52px;
+            font-size: 58px;
             color: #d4a017;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .about-card-3d h3 {
             font-weight: 700;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
         }
 
         .about-card-3d .badge-gold {
             display: inline-block;
-            margin-top: 10px;
-            padding: 5px 20px;
+            margin-top: 12px;
+            padding: 6px 24px;
             border-radius: 50px;
             background: linear-gradient(135deg, #d4a017, #f5c842);
             color: #0b0f1a;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .about-content h3 {
-            font-size: 26px;
+            font-size: 30px;
             font-weight: 700;
             line-height: 1.3;
         }
 
         .about-content p {
             color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
 
         .about-detail-item {
-            padding: 6px 0;
+            padding: 8px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .about-detail-item strong {
             color: #d4a017;
         }
 
-        .skill-card-3d {
+        /* ============================================================
+               SKILLS / SERVICES / WHY / PORTFOLIO CARDS
+               ============================================================ */
+        .skill-card-3d,
+        .service-card-3d,
+        .why-card-3d {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 18px;
-            padding: 28px 18px;
+            border-radius: 22px;
+            padding: 32px 20px;
             text-align: center;
-            height: 100%;
-            transition: 0.4s cubic-bezier(.23, 1, .32, 1);
-            transform-style: preserve-3d;
-            perspective: 600px;
-            cursor: default;
-        }
-
-        .skill-card-3d:hover {
-            transform: translateY(-8px) rotateX(3deg) rotateY(3deg);
-            border-color: rgba(212, 160, 23, 0.25);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            background: rgba(212, 160, 23, 0.04);
-        }
-
-        .skill-card-3d .icon {
-            font-size: 34px;
-            color: #d4a017;
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        .skill-card-3d h4 {
-            font-weight: 700;
-            font-size: 1.05rem;
-        }
-
-        .skill-card-3d p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.85rem;
-            margin: 0;
-        }
-
-        .service-card-3d {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 32px 22px;
             height: 100%;
             transition: 0.45s cubic-bezier(.23, 1, .32, 1);
             transform-style: preserve-3d;
-            perspective: 700px;
+            perspective: 600px;
+            cursor: default;
             position: relative;
             overflow: hidden;
         }
 
-        .service-card-3d::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 20px;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(212, 160, 23, 0.15), transparent 60%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
+        .skill-card-3d:hover,
+        .service-card-3d:hover,
+        .why-card-3d:hover {
+            transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+            border-color: rgba(212, 160, 23, 0.25);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            background: rgba(212, 160, 23, 0.05);
         }
 
-        .service-card-3d:hover {
-            transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
-            border-color: rgba(212, 160, 23, 0.2);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
-            background: rgba(212, 160, 23, 0.04);
+        .skill-card-3d .icon,
+        .why-card-3d .icon {
+            font-size: 38px;
+            color: #d4a017;
+            margin-bottom: 14px;
+            display: inline-block;
         }
 
         .service-card-3d .icon-box {
-            width: 58px;
-            height: 58px;
-            border-radius: 16px;
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
             background: linear-gradient(135deg, rgba(212, 160, 23, 0.15), rgba(212, 160, 23, 0.04));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
+            font-size: 28px;
             color: #d4a017;
-            margin-bottom: 18px;
+            margin: 0 auto 18px;
             border: 1px solid rgba(212, 160, 23, 0.08);
         }
 
-        .service-card-3d h3 {
-            font-size: 1.2rem;
+        .skill-card-3d h4,
+        .service-card-3d h3,
+        .why-card-3d h4 {
             font-weight: 700;
+            font-size: 1.15rem;
         }
 
-        .service-card-3d p {
+        .skill-card-3d p,
+        .service-card-3d p,
+        .why-card-3d p {
             color: rgba(255, 255, 255, 0.6);
-            margin: 0;
             font-size: 0.9rem;
+            margin: 0;
         }
 
-        .portfolio-wrapper {
-            perspective: 900px;
-        }
-
+        /* Portfolio specific */
         .portfolio-card-3d {
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
+            border-radius: 22px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: 0.5s cubic-bezier(.23, 1, .32, 1);
@@ -527,19 +559,19 @@
         }
 
         .portfolio-card-3d:hover {
-            transform: translateY(-10px) rotateX(3deg) rotateY(3deg) scale(1.01);
+            transform: translateY(-12px) rotateX(3deg) rotateY(3deg) scale(1.01);
             border-color: rgba(212, 160, 23, 0.2);
             box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
         }
 
         .portfolio-card-3d .image-placeholder {
-            height: 190px;
-            background: linear-gradient(135deg, rgba(212, 160, 23, 0.06), rgba(212, 160, 23, 0.02));
+            height: 200px;
+            background: linear-gradient(135deg, rgba(212, 160, 23, 0.08), rgba(212, 160, 23, 0.02));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 56px;
-            color: rgba(212, 160, 23, 0.3);
+            font-size: 60px;
+            color: rgba(212, 160, 23, 0.25);
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             position: relative;
             overflow: hidden;
@@ -548,7 +580,7 @@
         .portfolio-card-3d .image-placeholder .shine {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, transparent 40%, rgba(212, 160, 23, 0.04) 60%, transparent 80%);
+            background: linear-gradient(135deg, transparent 40%, rgba(212, 160, 23, 0.06) 60%, transparent 80%);
             transform: translateX(-100%);
             transition: 0.6s;
         }
@@ -558,29 +590,30 @@
         }
 
         .portfolio-card-3d .info {
-            padding: 20px 20px 22px;
+            padding: 22px 22px 24px;
         }
 
         .portfolio-card-3d .info h4 {
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.05rem;
         }
 
         .portfolio-card-3d .info p {
             color: #d4a017;
             font-weight: 500;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             margin: 0;
         }
 
+        /* filter buttons */
         .filter-btn-3d {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             color: rgba(255, 255, 255, 0.7);
-            padding: 8px 18px;
+            padding: 10px 26px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 0.78rem;
+            font-size: 0.85rem;
             transition: 0.3s;
             cursor: pointer;
             margin: 4px;
@@ -603,39 +636,43 @@
             display: none;
         }
 
+        /* ============================================================
+               EXPERIENCE
+               ============================================================ */
         .experience-box-3d {
             background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 24px;
-            padding: 34px 28px;
+            border-radius: 28px;
+            padding: 40px 35px;
             display: flex;
-            gap: 28px;
-            transition: 0.4s;
+            gap: 30px;
+            transition: 0.5s;
             transform-style: preserve-3d;
             perspective: 700px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .experience-box-3d:hover {
             border-color: rgba(212, 160, 23, 0.15);
             transform: rotateX(2deg) rotateY(2deg);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
         }
 
         .experience-box-3d .icon {
-            min-width: 64px;
-            width: 64px;
-            height: 64px;
+            min-width: 72px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
             background: linear-gradient(135deg, #d4a017, #f5c842);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 32px;
             color: #0b0f1a;
-            box-shadow: 0 0 50px rgba(212, 160, 23, 0.15);
+            box-shadow: 0 0 60px rgba(212, 160, 23, 0.15);
             flex-shrink: 0;
         }
 
@@ -643,18 +680,18 @@
             color: #d4a017;
             font-weight: 600;
             letter-spacing: 2px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
         }
 
         .experience-box-3d h3 {
             font-weight: 700;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
         }
 
         .experience-box-3d p {
             color: rgba(255, 255, 255, 0.65);
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
 
         .experience-box-3d ul {
@@ -662,15 +699,15 @@
             padding: 0;
             display: flex;
             flex-wrap: wrap;
-            gap: 6px 16px;
-            margin-top: 8px;
+            gap: 8px 20px;
+            margin-top: 10px;
         }
 
         .experience-box-3d ul li {
             color: rgba(255, 255, 255, 0.75);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             position: relative;
-            padding-left: 18px;
+            padding-left: 20px;
         }
 
         .experience-box-3d ul li::before {
@@ -678,24 +715,27 @@
             color: #d4a017;
             position: absolute;
             left: 0;
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             top: 2px;
         }
 
+        /* ============================================================
+               TOOLS
+               ============================================================ */
         .tools-wrapper {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.2rem;
         }
 
         .tools-wrapper .tool-card-3d {
             flex: 0 0 auto;
-            width: 110px;
+            width: 120px;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 16px;
-            padding: 22px 12px;
+            border-radius: 20px;
+            padding: 24px 14px;
             text-align: center;
             transition: 0.4s cubic-bezier(.23, 1, .32, 1);
             transform-style: preserve-3d;
@@ -703,62 +743,28 @@
         }
 
         .tools-wrapper .tool-card-3d:hover {
-            transform: translateY(-6px) rotateX(4deg) rotateY(4deg);
+            transform: translateY(-8px) rotateX(4deg) rotateY(4deg);
             border-color: rgba(212, 160, 23, 0.2);
             background: rgba(212, 160, 23, 0.04);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
         }
 
         .tools-wrapper .tool-card-3d .icon {
-            font-size: 32px;
+            font-size: 36px;
             color: #d4a017;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: inline-block;
         }
 
         .tools-wrapper .tool-card-3d h5 {
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             margin: 0;
         }
 
-        .why-card-3d {
-            text-align: center;
-            padding: 28px 18px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 18px;
-            transition: 0.4s cubic-bezier(.23, 1, .32, 1);
-            transform-style: preserve-3d;
-            perspective: 600px;
-            height: 100%;
-        }
-
-        .why-card-3d:hover {
-            transform: translateY(-8px) rotateX(2deg) rotateY(2deg);
-            border-color: rgba(212, 160, 23, 0.15);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            background: rgba(212, 160, 23, 0.03);
-        }
-
-        .why-card-3d .icon {
-            font-size: 40px;
-            color: #d4a017;
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        .why-card-3d h4 {
-            font-weight: 700;
-            font-size: 1.05rem;
-        }
-
-        .why-card-3d p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.85rem;
-            margin: 0;
-        }
-
+        /* ============================================================
+               CONTACT
+               ============================================================ */
         .contact-section-3d {
             background: #0b0f1a;
             position: relative;
@@ -770,17 +776,17 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 30% 50%, rgba(212, 160, 23, 0.03), transparent 70%);
+            background: radial-gradient(ellipse at 30% 50%, rgba(212, 160, 23, 0.04), transparent 70%);
             pointer-events: none;
         }
 
         .contact-item-3d {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
-            padding: 14px 16px;
-            border-radius: 14px;
+            gap: 18px;
+            margin-bottom: 22px;
+            padding: 16px 20px;
+            border-radius: 16px;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
             transition: 0.3s;
@@ -789,42 +795,42 @@
         .contact-item-3d:hover {
             background: rgba(212, 160, 23, 0.04);
             border-color: rgba(212, 160, 23, 0.12);
-            transform: translateX(4px);
+            transform: translateX(6px);
         }
 
         .contact-item-3d .icon {
-            width: 44px;
-            height: 44px;
-            min-width: 44px;
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
             border-radius: 50%;
             background: linear-gradient(135deg, #d4a017, #f5c842);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             color: #0b0f1a;
         }
 
         .contact-item-3d h5 {
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             margin: 0;
         }
 
         .contact-item-3d p {
             margin: 0;
             color: rgba(255, 255, 255, 0.6);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             word-break: break-word;
         }
 
         .form-control-3d {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 12px 16px;
+            border-radius: 14px;
+            padding: 14px 18px;
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 1rem;
             transition: 0.3s;
         }
 
@@ -841,13 +847,16 @@
 
         .form-label-3d {
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.7);
             margin-bottom: 4px;
         }
 
+        /* ============================================================
+               SOCIAL & FOOTER
+               ============================================================ */
         .social-bar {
-            padding: 40px 0;
+            padding: 45px 0;
             background: rgba(255, 255, 255, 0.01);
             border-top: 1px solid rgba(255, 255, 255, 0.03);
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
@@ -855,22 +864,22 @@
 
         .social-bar h3 {
             font-weight: 700;
-            margin-bottom: 16px;
-            font-size: 1.3rem;
+            margin-bottom: 18px;
+            font-size: 1.4rem;
         }
 
         .social-icon-3d {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 48px;
-            height: 48px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             color: rgba(255, 255, 255, 0.7);
-            font-size: 20px;
-            margin: 0 4px;
+            font-size: 22px;
+            margin: 0 6px;
             transition: 0.35s cubic-bezier(.23, 1, .32, 1);
             text-decoration: none;
         }
@@ -878,14 +887,14 @@
         .social-icon-3d:hover {
             background: linear-gradient(135deg, #d4a017, #f5c842);
             color: #0b0f1a;
-            transform: translateY(-4px) scale(1.08);
-            box-shadow: 0 10px 40px rgba(212, 160, 23, 0.2);
+            transform: translateY(-6px) scale(1.08);
+            box-shadow: 0 10px 50px rgba(212, 160, 23, 0.2);
             border-color: #d4a017;
         }
 
         footer {
             background: #070b14;
-            padding: 40px 0 24px;
+            padding: 45px 0 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.02);
         }
 
@@ -895,78 +904,94 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
 
         footer p {
             color: rgba(255, 255, 255, 0.4);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             margin: 2px 0;
         }
 
         footer .copyright {
-            margin-top: 16px !important;
-            font-size: 0.75rem;
+            margin-top: 18px !important;
+            font-size: 0.8rem;
             color: rgba(255, 255, 255, 0.2);
         }
 
+        /* ============================================================
+               SCROLL REVEAL
+               ============================================================ */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: 0.9s cubic-bezier(.23, 1, .32, 1);
+            transform: translateY(50px);
+            transition: 1s cubic-bezier(.23, 1, .32, 1);
         }
-
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         .reveal-left {
             opacity: 0;
-            transform: translateX(-40px);
-            transition: 0.9s cubic-bezier(.23, 1, .32, 1);
+            transform: translateX(-50px);
+            transition: 1s cubic-bezier(.23, 1, .32, 1);
         }
-
         .reveal-left.visible {
             opacity: 1;
             transform: translateX(0);
         }
-
         .reveal-right {
             opacity: 0;
-            transform: translateX(40px);
-            transition: 0.9s cubic-bezier(.23, 1, .32, 1);
+            transform: translateX(50px);
+            transition: 1s cubic-bezier(.23, 1, .32, 1);
         }
-
         .reveal-right.visible {
             opacity: 1;
             transform: translateX(0);
         }
-
         .reveal-scale {
             opacity: 0;
-            transform: scale(0.94);
-            transition: 0.9s cubic-bezier(.23, 1, .32, 1);
+            transform: scale(0.92);
+            transition: 1s cubic-bezier(.23, 1, .32, 1);
         }
-
         .reveal-scale.visible {
             opacity: 1;
             transform: scale(1);
         }
 
         /* ============================================================
-            
+               RESPONSIVE — CENTERED & MODERN
+               ============================================================ */
+
+        /* Tablets & small laptops */
+        @media (max-width: 991px) {
+            .hero-section {
+                text-align: center;
+                padding-top: 130px;
+            }
+            .hero-section h1 {
+                font-size: 48px;
+            }
+            .hero-section h2 {
+                font-size: 24px;
+            }
+            .hero-text {
+                margin: 0 auto;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
             .designer-card-3d {
                 max-width: 320px;
-                margin: 32px auto 0;
+                margin: 40px auto 0;
             }
             .section-title h2 {
-                font-size: 32px;
+                font-size: 36px;
             }
             .experience-box-3d {
                 flex-direction: column;
-                padding: 30px 24px;
                 text-align: center;
+                padding: 35px 25px;
             }
             .experience-box-3d .icon {
                 margin: 0 auto;
@@ -974,251 +999,208 @@
             .experience-box-3d ul {
                 justify-content: center;
             }
-            .navbar-nav {
-                padding-top: 8px;
-            }
-            .nav-link {
-                margin: 2px 0;
-            }
             .navbar-brand {
-                font-size: 20px;
+                font-size: 22px;
             }
             .section-padding {
-                padding: 60px 0;
+                padding: 70px 0;
             }
         }
 
-        /* --- Large phones --- */
+        /* Mobile phones */
         @media (max-width: 576px) {
             .section-padding {
-                padding: 50px 0;
+                padding: 55px 0;
             }
             .hero-section {
-                padding: 100px 0 40px;
+                padding: 110px 0 40px;
                 min-height: auto;
             }
             .hero-section h1 {
-                font-size: 34px;
+                font-size: 36px;
                 letter-spacing: -1px;
             }
             .hero-section h2 {
-                font-size: 18px;
-                margin-bottom: 12px;
+                font-size: 20px;
             }
             .hero-text {
-                font-size: 0.9rem;
+                font-size: 0.92rem;
             }
             .hero-buttons {
-                gap: 10px;
-                margin-top: 20px;
+                gap: 12px;
+                margin-top: 24px;
             }
             .hero-buttons .btn {
-                font-size: 0.8rem;
-                padding: 9px 18px;
+                font-size: 0.85rem;
+                padding: 10px 22px;
             }
             .section-title h2 {
-                font-size: 26px;
+                font-size: 28px;
             }
             .section-title .label {
-                font-size: 0.6rem;
+                font-size: 0.65rem;
                 letter-spacing: 2px;
-                padding: 2px 12px;
+                padding: 3px 14px;
             }
             .section-title {
-                margin-bottom: 32px;
+                margin-bottom: 36px;
             }
 
-            /* designer card */
+            /* Cards centered via justify-content-center in rows */
             .designer-card-3d {
                 max-width: 280px;
             }
             .designer-card-3d .card-inner {
-                padding: 30px 16px 24px;
+                padding: 32px 18px 26px;
             }
             .designer-icon-3d {
-                width: 72px;
-                height: 72px;
-                font-size: 32px;
-                margin-bottom: 14px;
+                width: 76px;
+                height: 76px;
+                font-size: 34px;
             }
             .designer-card-3d h3 {
-                font-size: 18px;
-            }
-            .designer-card-3d p {
-                font-size: 0.8rem;
+                font-size: 20px;
             }
             .experience-badge-3d {
-                font-size: 0.7rem;
-                padding: 6px 16px;
+                font-size: 0.75rem;
+                padding: 7px 18px;
             }
 
             .about-card-3d {
-                padding: 30px 16px;
-            }
-            .about-card-3d .icon {
-                font-size: 40px;
+                padding: 32px 18px;
             }
             .about-content h3 {
-                font-size: 22px;
+                font-size: 24px;
             }
             .about-content p {
-                font-size: 0.88rem;
+                font-size: 0.92rem;
             }
             .about-detail-item {
-                font-size: 0.82rem;
+                font-size: 0.85rem;
             }
 
-            /* skills */
-            .skill-card-3d {
-                padding: 22px 14px;
+            .skill-card-3d,
+            .service-card-3d,
+            .why-card-3d {
+                padding: 24px 16px;
             }
-            .skill-card-3d .icon {
-                font-size: 28px;
-            }
-            .skill-card-3d h4 {
-                font-size: 0.95rem;
-            }
-            .skill-card-3d p {
-                font-size: 0.8rem;
-            }
-
-            /* services */
-            .service-card-3d {
-                padding: 26px 18px;
+            .skill-card-3d .icon,
+            .why-card-3d .icon {
+                font-size: 30px;
             }
             .service-card-3d .icon-box {
-                width: 48px;
-                height: 48px;
-                font-size: 20px;
-                margin-bottom: 14px;
+                width: 50px;
+                height: 50px;
+                font-size: 22px;
             }
-            .service-card-3d h3 {
-                font-size: 1.05rem;
+            .skill-card-3d h4,
+            .service-card-3d h3,
+            .why-card-3d h4 {
+                font-size: 1rem;
             }
-            .service-card-3d p {
+            .skill-card-3d p,
+            .service-card-3d p,
+            .why-card-3d p {
                 font-size: 0.82rem;
             }
 
-           
             .portfolio-card-3d .image-placeholder {
-                height: 150px;
-                font-size: 42px;
+                height: 160px;
+                font-size: 44px;
             }
             .portfolio-card-3d .info {
-                padding: 16px 16px 18px;
+                padding: 18px 16px 20px;
             }
             .portfolio-card-3d .info h4 {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
             .filter-btn-3d {
                 font-size: 0.7rem;
-                padding: 6px 14px;
+                padding: 7px 16px;
                 margin: 3px;
             }
 
-            
             .experience-box-3d {
-                padding: 24px 18px;
+                padding: 26px 18px;
                 gap: 20px;
             }
             .experience-box-3d .icon {
-                min-width: 52px;
-                width: 52px;
-                height: 52px;
-                font-size: 22px;
-            }
-            .experience-box-3d h3 {
-                font-size: 1.2rem;
-            }
-            .experience-box-3d p {
-                font-size: 0.85rem;
-            }
-            .experience-box-3d ul li {
-                font-size: 0.8rem;
-            }
-
-           
-            .tools-wrapper {
-                gap: 0.7rem;
-            }
-            .tools-wrapper .tool-card-3d {
-                width: 85px;
-                padding: 16px 8px;
-            }
-            .tools-wrapper .tool-card-3d .icon {
+                min-width: 56px;
+                width: 56px;
+                height: 56px;
                 font-size: 24px;
             }
-            .tools-wrapper .tool-card-3d h5 {
-                font-size: 0.7rem;
-            }
-
-            
-            .why-card-3d {
-                padding: 22px 14px;
-            }
-            .why-card-3d .icon {
-                font-size: 32px;
-            }
-            .why-card-3d h4 {
-                font-size: 0.95rem;
-            }
-            .why-card-3d p {
-                font-size: 0.8rem;
-            }
-
-            /* contact */
-            .contact-section-3d .section-padding {
-                padding: 50px 0;
-            }
-            .contact-item-3d {
-                padding: 12px 14px;
-                gap: 12px;
-                flex-wrap: wrap;
-            }
-            .contact-item-3d .icon {
-                width: 38px;
-                height: 38px;
-                min-width: 38px;
-                font-size: 16px;
-            }
-            .contact-item-3d h5 {
-                font-size: 0.8rem;
-            }
-            .contact-item-3d p {
-                font-size: 0.78rem;
-            }
-            .form-control-3d {
-                font-size: 0.88rem;
-                padding: 10px 14px;
-            }
-            .form-label-3d {
-                font-size: 0.8rem;
-            }
-
-            .social-bar h3 {
-                font-size: 1.1rem;
-            }
-            .social-icon-3d {
-                width: 42px;
-                height: 42px;
-                font-size: 18px;
-                margin: 0 3px;
-            }
-
-           
-            footer h4 {
+            .experience-box-3d h3 {
                 font-size: 1.3rem;
             }
-            footer p {
+            .experience-box-3d p {
+                font-size: 0.88rem;
+            }
+            .experience-box-3d ul li {
+                font-size: 0.82rem;
+            }
+
+            .tools-wrapper {
+                gap: 0.8rem;
+            }
+            .tools-wrapper .tool-card-3d {
+                width: 90px;
+                padding: 18px 10px;
+            }
+            .tools-wrapper .tool-card-3d .icon {
+                font-size: 26px;
+            }
+            .tools-wrapper .tool-card-3d h5 {
                 font-size: 0.75rem;
             }
 
-            /* navbar */
+            .contact-item-3d {
+                padding: 14px 16px;
+                gap: 14px;
+                flex-wrap: wrap;
+            }
+            .contact-item-3d .icon {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                font-size: 18px;
+            }
+            .contact-item-3d h5 {
+                font-size: 0.85rem;
+            }
+            .contact-item-3d p {
+                font-size: 0.82rem;
+            }
+            .form-control-3d {
+                font-size: 0.9rem;
+                padding: 12px 16px;
+            }
+            .form-label-3d {
+                font-size: 0.85rem;
+            }
+
+            .social-bar h3 {
+                font-size: 1.15rem;
+            }
+            .social-icon-3d {
+                width: 44px;
+                height: 44px;
+                font-size: 18px;
+                margin: 0 4px;
+            }
+
+            footer h4 {
+                font-size: 1.4rem;
+            }
+            footer p {
+                font-size: 0.8rem;
+            }
+
             .navbar {
                 padding: 8px 0;
             }
             .navbar-brand {
-                font-size: 18px;
+                font-size: 20px;
             }
             .navbar-toggler {
                 padding: 4px 8px;
@@ -1226,101 +1208,81 @@
             }
             .btn-gold,
             .btn-outline-gold {
-                font-size: 0.8rem;
-                padding: 8px 18px;
+                font-size: 0.85rem;
+                padding: 9px 20px;
             }
-
-           
             .row.g-4 {
                 --bs-gutter-y: 1.2rem;
             }
-            .row.g-5 {
-                --bs-gutter-y: 1.8rem;
-            }
-
             .container {
                 padding-left: 16px;
                 padding-right: 16px;
             }
         }
 
+        /* Very small phones */
         @media (max-width: 380px) {
             .hero-section h1 {
-                font-size: 28px;
+                font-size: 30px;
             }
             .hero-section h2 {
-                font-size: 16px;
+                font-size: 17px;
             }
             .hero-text {
-                font-size: 0.82rem;
-            }
-            .hero-buttons .btn {
-                font-size: 0.72rem;
-                padding: 7px 14px;
+                font-size: 0.85rem;
             }
             .section-title h2 {
-                font-size: 22px;
+                font-size: 24px;
             }
             .designer-card-3d {
                 max-width: 240px;
             }
             .designer-card-3d .card-inner {
-                padding: 24px 12px 20px;
+                padding: 26px 14px 22px;
             }
             .designer-icon-3d {
-                width: 60px;
-                height: 60px;
-                font-size: 26px;
-                margin-bottom: 10px;
-            }
-            .designer-card-3d h3 {
-                font-size: 16px;
-            }
-            .experience-badge-3d {
-                font-size: 0.6rem;
-                padding: 4px 12px;
+                width: 62px;
+                height: 62px;
+                font-size: 28px;
             }
             .tools-wrapper .tool-card-3d {
-                width: 72px;
-                padding: 12px 6px;
+                width: 75px;
+                padding: 14px 6px;
             }
             .tools-wrapper .tool-card-3d .icon {
-                font-size: 20px;
+                font-size: 22px;
             }
             .tools-wrapper .tool-card-3d h5 {
-                font-size: 0.6rem;
+                font-size: 0.65rem;
             }
             .filter-btn-3d {
                 font-size: 0.6rem;
-                padding: 4px 10px;
+                padding: 5px 12px;
             }
             .portfolio-card-3d .image-placeholder {
-                height: 120px;
-                font-size: 34px;
-            }
-            .contact-item-3d p {
-                font-size: 0.72rem;
+                height: 130px;
+                font-size: 36px;
             }
             .container {
                 padding-left: 12px;
                 padding-right: 12px;
             }
             .section-padding {
-                padding: 40px 0;
+                padding: 45px 0;
             }
         }
 
-   
+        /* Landscape phones */
         @media (max-height: 500px) and (orientation: landscape) {
             .hero-section {
-                padding: 80px 0 30px;
+                padding: 90px 0 30px;
                 min-height: auto;
             }
             .hero-section h1 {
-                font-size: 32px;
+                font-size: 34px;
             }
             .hero-section h2 {
-                font-size: 18px;
+                font-size: 20px;
             }
             .designer-card-3d {
                 max-width: 220px;
@@ -1329,17 +1291,16 @@
                 padding: 20px 12px 16px;
             }
             .designer-icon-3d {
-                width: 54px;
-                height: 54px;
+                width: 56px;
+                height: 56px;
                 font-size: 24px;
-                margin-bottom: 8px;
             }
             .designer-card-3d h3 {
-                font-size: 16px;
+                font-size: 17px;
             }
             .experience-badge-3d {
-                font-size: 0.6rem;
-                padding: 4px 12px;
+                font-size: 0.65rem;
+                padding: 5px 14px;
             }
         }
     </style>
@@ -1347,9 +1308,11 @@
 
 <body>
 
+    <!-- ========== THREE.JS CANVAS ========== -->
     <div id="three-canvas"></div>
     <div class="glow-overlay"></div>
 
+    <!-- ========== NAVBAR ========== -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNavbar">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#home">
@@ -1383,6 +1346,7 @@
         </div>
     </nav>
 
+    <!-- ========== HERO ========== -->
     <section id="home" class="hero-section">
         <div class="container">
             <div class="row align-items-center">
@@ -1407,7 +1371,7 @@
                             </div>
                             <h3>Graphic Designer</h3>
                             <p>Creative Visual Designer</p>
-                            <div class="experience-badge-3d floating-badge">
+                            <div class="experience-badge-3d">
                                 <i class="bi bi-star-fill me-1"></i> 1 Year Experience
                             </div>
                         </div>
@@ -1417,6 +1381,7 @@
         </div>
     </section>
 
+    <!-- ========== ABOUT ========== -->
     <section id="about" class="section-padding">
         <div class="container">
             <div class="section-title reveal">
@@ -1451,13 +1416,14 @@
         </div>
     </section>
 
+    <!-- ========== SKILLS ========== -->
     <section id="skills" class="section-padding bg-dark-soft">
         <div class="container">
             <div class="section-title reveal">
                 <span class="label">My Skills</span>
                 <h2>What <span class="highlight">I Can Do</span></h2>
             </div>
-            <div class="row g-3 g-lg-4">
+            <div class="row g-3 g-lg-4 justify-content-center">
                 <div class="col-6 col-md-6 col-lg-4 reveal-scale">
                     <div class="skill-card-3d"><span class="icon"><i class="bi bi-brush-fill"></i></span><h4>Graphic Design</h4><p>Creating attractive and professional visual designs.</p></div>
                 </div>
@@ -1489,13 +1455,14 @@
         </div>
     </section>
 
+    <!-- ========== SERVICES ========== -->
     <section id="services" class="section-padding">
         <div class="container">
             <div class="section-title reveal">
                 <span class="label">My Services</span>
                 <h2>What <span class="highlight">I Offer</span></h2>
             </div>
-            <div class="row g-3 g-lg-4">
+            <div class="row g-3 g-lg-4 justify-content-center">
                 <div class="col-6 col-md-6 col-lg-4 reveal-scale">
                     <div class="service-card-3d"><div class="icon-box"><i class="bi bi-brush-fill"></i></div><h3>Graphic Design</h3><p>Creative visual designs that communicate your ideas clearly and professionally.</p></div>
                 </div>
@@ -1518,6 +1485,7 @@
         </div>
     </section>
 
+    <!-- ========== PORTFOLIO ========== -->
     <section id="portfolio" class="section-padding bg-dark-soft">
         <div class="container">
             <div class="section-title reveal">
@@ -1533,7 +1501,7 @@
                 <button class="filter-btn-3d" data-filter="social">Social</button>
             </div>
 
-            <div class="row g-3 g-lg-4 portfolio-container">
+            <div class="row g-3 g-lg-4 portfolio-container justify-content-center">
                 <div class="col-6 col-md-6 col-lg-4 portfolio-item flyer reveal-scale">
                     <div class="portfolio-card-3d">
                         <div class="image-placeholder"><i class="bi bi-image"></i><div class="shine"></div></div>
@@ -1574,6 +1542,7 @@
         </div>
     </section>
 
+    <!-- ========== EXPERIENCE ========== -->
     <section id="experience" class="section-padding">
         <div class="container">
             <div class="section-title reveal">
@@ -1599,14 +1568,13 @@
         </div>
     </section>
 
-    <!-- ========== TOOLS — CENTERED ========== -->
+    <!-- ========== TOOLS ========== -->
     <section class="section-padding bg-dark-soft">
         <div class="container">
             <div class="section-title reveal">
                 <span class="label">Design Tools</span>
                 <h2>Tools <span class="highlight">I Use</span></h2>
             </div>
-
             <div class="tools-wrapper reveal-scale">
                 <div class="tool-card-3d"><span class="icon"><i class="bi bi-vector-pen"></i></span><h5>CorelDRAW</h5></div>
                 <div class="tool-card-3d"><span class="icon"><i class="bi bi-palette"></i></span><h5>Canva</h5></div>
@@ -1614,20 +1582,20 @@
                 <div class="tool-card-3d"><span class="icon"><i class="bi bi-bezier2"></i></span><h5>Illustrator</h5></div>
                 <div class="tool-card-3d"><span class="icon"><i class="bi bi-grid"></i></span><h5>Figma</h5></div>
             </div>
-
-            <p class="text-center mt-3 text-secondary" style="font-size:0.8rem;">
+            <p class="text-center mt-3 text-secondary" style="font-size:0.85rem;">
                 Add or remove tools based on the software you actually use.
             </p>
         </div>
     </section>
 
+    <!-- ========== WHY CHOOSE ========== -->
     <section class="section-padding">
         <div class="container">
             <div class="section-title reveal">
                 <span class="label">Why Choose Me</span>
                 <h2>What Makes My Work <span class="highlight">Different</span></h2>
             </div>
-            <div class="row g-3 g-lg-4">
+            <div class="row g-3 g-lg-4 justify-content-center">
                 <div class="col-6 col-md-6 col-lg-3 reveal-scale">
                     <div class="why-card-3d"><span class="icon"><i class="bi bi-lightbulb-fill"></i></span><h4>Creative Approach</h4><p>I develop creative ideas to make designs attractive and meaningful.</p></div>
                 </div>
@@ -1644,6 +1612,7 @@
         </div>
     </section>
 
+    <!-- ========== CONTACT ========== -->
     <section id="contact" class="contact-section-3d section-padding">
         <div class="container">
             <div class="section-title reveal">
@@ -1652,8 +1621,8 @@
             </div>
             <div class="row g-4 g-lg-5">
                 <div class="col-lg-5 reveal-left">
-                    <h3 style="font-weight:700;font-size:1.6rem;">Have a design project?</h3>
-                    <p style="color:rgba(255,255,255,0.6);font-size:0.95rem;">If you need a creative flyer, logo, poster, social media
+                    <h3 style="font-weight:700;font-size:1.8rem;">Have a design project?</h3>
+                    <p style="color:rgba(255,255,255,0.6);font-size:1rem;">If you need a creative flyer, logo, poster, social media
                         design or branding project, feel free to contact me.</p>
                     <div class="contact-info">
                         <div class="contact-item-3d">
@@ -1701,6 +1670,7 @@
         </div>
     </section>
 
+    <!-- ========== SOCIAL BAR ========== -->
     <section class="social-bar">
         <div class="container text-center reveal">
             <h3>Connect With <span class="highlight" style="background:linear-gradient(135deg,#d4a017,#f5c842);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Biyigraphics</span></h3>
@@ -1713,6 +1683,7 @@
         </div>
     </section>
 
+    <!-- ========== FOOTER ========== -->
     <footer>
         <div class="container text-center">
             <h4>Biyigraphics</h4>
@@ -1721,13 +1692,20 @@
         </div>
     </footer>
 
+    <!-- ========== SCRIPTS ========== -->
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
     </script>
 
+    <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
     </script>
 
+    <!-- Custom -->
     <script>
+        // ============================================================
+        //  THREE.JS — 3D BACKGROUND
+        // ============================================================
         (function initThree() {
             const container = document.getElementById('three-canvas');
             if (!container) return;
@@ -1773,6 +1751,7 @@
             mesh1.position.set(-2.8, 0.2, 0);
             group.add(mesh1);
 
+            // Torus (gold ring)
             const geo2 = new THREE.TorusGeometry(1.2, 0.25, 16, 32);
             const mat2 = new THREE.MeshPhysicalMaterial({
                 color: 0xd4a017,
@@ -1790,6 +1769,7 @@
             mesh2.rotation.y = 0.5;
             group.add(mesh2);
 
+            // Small floating spheres
             const sphereMat = new THREE.MeshPhysicalMaterial({
                 color: 0xf5c842,
                 metalness: 0.2,
@@ -1816,6 +1796,7 @@
                 group.add(sphere);
             }
 
+            // Wireframe Icosahedron (large, subtle)
             const wireMat = new THREE.MeshPhysicalMaterial({
                 color: 0xd4a017,
                 metalness: 0.1,
@@ -1830,6 +1811,7 @@
 
             scene.add(group);
 
+            // ---- Mouse tracking for parallax ----
             let mouseX = 0,
                 mouseY = 0;
             let targetX = 0,
@@ -1840,6 +1822,7 @@
                 mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
             });
 
+            // ---- Touch support for mobile ----
             document.addEventListener('touchmove', (e) => {
                 const touch = e.touches[0];
                 if (touch) {
@@ -1848,6 +1831,7 @@
                 }
             }, { passive: true });
 
+            // ---- Animation loop ----
             function animate() {
                 requestAnimationFrame(animate);
 
@@ -1880,6 +1864,7 @@
             }
             animate();
 
+            // ---- Resize ----
             window.addEventListener('resize', () => {
                 const w = window.innerWidth;
                 const h = window.innerHeight;
@@ -1890,9 +1875,15 @@
         })();
 
 
+        // ============================================================
+        //  CURRENT YEAR
+        // ============================================================
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
 
+        // ============================================================
+        //  PORTFOLIO FILTER
+        // ============================================================
         const filterBtns = document.querySelectorAll('.filter-btn-3d');
         const portfolioItems = document.querySelectorAll('.portfolio-item');
 
@@ -1912,6 +1903,9 @@
         });
 
 
+        // ============================================================
+        //  CONTACT FORM
+        // ============================================================
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
@@ -1930,6 +1924,9 @@
         }
 
 
+        // ============================================================
+        //  NAVBAR AUTO CLOSE (mobile)
+        // ============================================================
         const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
         const navbarCollapse = document.getElementById('mainNav');
         navLinks.forEach(link => {
@@ -1942,12 +1939,18 @@
         });
 
 
+        // ============================================================
+        //  NAVBAR SCROLL SHADOW
+        // ============================================================
         const navbar = document.querySelector('.navbar');
         window.addEventListener('scroll', function() {
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
 
 
+        // ============================================================
+        //  SCROLL REVEAL (Intersection Observer)
+        // ============================================================
         const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
 
         const observer = new IntersectionObserver((entries) => {
@@ -1964,6 +1967,9 @@
         revealElements.forEach(el => observer.observe(el));
 
 
+        // ============================================================
+        //  DROPDOWN HOVER (desktop)
+        // ============================================================
         if (window.innerWidth > 991) {
             document.querySelectorAll('.navbar .dropdown').forEach(drop => {
                 drop.addEventListener('mouseenter', function() {
